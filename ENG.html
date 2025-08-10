@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EngHub - Engineering Student Materials</title>
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --success-color: #2ecc71;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: var(--secondary-color);
+        }
+        
+        .btn-secondary:hover {
+            background: #1a252f;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .logo span {
+            color: var(--primary-color);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.8)), 
+                        url('https://imgs.search.brave.com/SaHgJJi-0sq_RlGQkfaJ0-wuNub4PHV5VBtLMybEjkQ/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzAzLzMyLzQxLzUy/LzM2MF9GXzMzMjQx/NTI0M18yUFJJalNy/c2ZhOGdjSkRvQWpq/cEUzcldoaVduMG5E/dC5qcGc');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        /* Search Section */
+        .search-section {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-top: -50px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .search-form {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .search-form input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .search-form select {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        /* Browse Section */
+        .browse {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .section-title h2 {
+            font-size: 2rem;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+        
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .category-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .category-img {
+            height: 150px;
+            background-color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+        
+        .category-info {
+            padding: 20px;
+        }
+        
+        .category-info h3 {
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+        }
+        
+        .category-info p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        /* Upload Section */
+        .upload {
+            background: var(--light-color);
+            padding: 60px 0;
+        }
+        
+        .upload-container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .upload-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .form-group textarea {
+            min-height: 100px;
+        }
+        
+        .file-upload {
+            grid-column: span 2;
+            text-align: center;
+            border: 2px dashed #ddd;
+            padding: 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .file-upload:hover {
+            border-color: var(--primary-color);
+            background: rgba(52, 152, 219, 0.05);
+        }
+        
+        .file-upload i {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        /* Recent Uploads */
+        .recent-uploads {
+            padding: 60px 0;
+        }
+        
+        .materials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .material-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .material-header {
+            background: var(--secondary-color);
+            color: white;
+            padding: 15px;
+        }
+        
+        .material-header h3 {
+            margin-bottom: 5px;
+        }
+        
+        .material-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: var(--light-color);
+        }
+        
+        .material-body {
+            padding: 15px;
+        }
+        
+        .material-description {
+            margin-bottom: 15px;
+            color: #666;
+        }
+        
+        .material-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-bottom: 15px;
+        }
+        
+        .tag {
+            background: var(--light-color);
+            padding: 3px 8px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        
+        .material-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .rating {
+            color: #f1c40f;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--secondary-color);
+            color: white;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-col h3 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-col ul li a {
+            color: #bdc3c7;
+            transition: color 0.3s;
+        }
+        
+        .footer-col ul li a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #bdc3c7;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+                justify-content: center;
+            }
+            
+            .search-form {
+                flex-direction: column;
+            }
+            
+            .upload-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .file-upload {
+                grid-column: span 1;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">Eng<span>Hub</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#browse">Browse</a></li>
+                    <li><a href="#upload">Upload</a></li>
+                    <li><a href="#">Login</a></li>
+                    <li><a href="#" class="btn">Sign Up</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Engineering Student Materials Hub</h1>
+            <p>Access and share lecture notes, lab reports, solved problems, and exam papers from engineering students worldwide.</p>
+            <a href="#upload" class="btn">Share Your Materials</a>
+            <a href="#browse" class="btn btn-secondary">Browse Resources</a>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <div class="container">
+        <section class="search-section">
+            <form class="search-form">
+                <input type="text" placeholder="Search for materials...">
+                <select>
+                    <option value="">All Disciplines</option>
+                    <option value="mechanical">Mechanical</option>
+                    <option value="electrical">Electrical</option>
+                    <option value="computer">Computer</option>
+                    <option value="civil">Civil</option>
+                    <option value="chemical">Chemical</option>
+                </select>
+                <select>
+                    <option value="">All Years</option>
+                    <option value="1">First Year</option>
+                    <option value="2">Second Year</option>
+                    <option value="3">Third Year</option>
+                    <option value="4">Fourth Year</option>
+                </select>
+                <button type="submit" class="btn">Search</button>
+            </form>
+        </section>
+    </div>
+
+    <!-- Browse Section -->
+    <section class="browse" id="browse">
+        <div class="container">
+            <div class="section-title">
+                <h2>Browse by Category</h2>
+                <p>Find materials organized by engineering discipline and subject</p>
+            </div>
+            <div class="categories">
+                <div class="category-card">
+                    <div class="category-img" style="background-color: #e74c3c;">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <div class="category-info">
+                        <h3>Mechanical Engineering</h3>
+                        <p>Thermodynamics, Fluid Mechanics, Machine Design</p>
+                        <a href="#" class="btn">Browse</a>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <div class="category-img" style="background-color: #3498db;">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div class="category-info">
+                        <h3>Electrical Engineering</h3>
+                        <p>Circuit Theory, Power Systems, Electronics</p>
+                        <a href="#" class="btn">Browse</a>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <div class="category-img" style="background-color: #2ecc71;">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <div class="category-info">
+                        <h3>Computer Engineering</h3>
+                        <p>Algorithms, Data Structures, Computer Architecture</p>
+                        <a href="#" class="btn">Browse</a>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <div class="category-img" style="background-color: #9b59b6;">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <div class="category-info">
+                        <h3>Civil Engineering</h3>
+                        <p>Structural Analysis, Geotechnics, Transportation</p>
+                        <a href="#" class="btn">Browse</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upload Section -->
+    <section class="upload" id="upload">
+        <div class="container">
+            <div class="section-title">
+                <h2>Share Your Materials</h2>
+                <p>Contribute to the engineering student community by uploading your study materials</p>
+            </div>
+            <div class="upload-container">
+                <form class="upload-form">
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" id="title" placeholder="e.g. Thermodynamics Lecture Notes">
+                    </div>
+                    <div class="form-group">
+                        <label for="discipline">Discipline</label>
+                        <select id="discipline">
+                            <option value="">Select Discipline</option>
+                            <option value="mechanical">Mechanical</option>
+                            <option value="electrical">Electrical</option>
+                            <option value="computer">Computer</option>
+                            <option value="civil">Civil</option>
+                            <option value="chemical">Chemical</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" placeholder="e.g. Thermodynamics">
+                    </div>
+                    <div class="form-group">
+                        <label for="year">Year</label>
+                        <select id="year">
+                            <option value="">Select Year</option>
+                            <option value="1">First Year</option>
+                            <option value="2">Second Year</option>
+                            <option value="3">Third Year</option>
+                            <option value="4">Fourth Year</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea id="description" placeholder="Brief description of the material"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="tags">Tags (comma separated)</label>
+                        <input type="text" id="tags" placeholder="e.g. thermodynamics, heat transfer, lecture notes">
+                    </div>
+                    <div class="file-upload">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <h3>Drag & Drop Files Here</h3>
+                        <p>or click to browse (PDF, DOC, PPT, Images)</p>
+                        <input type="file" style="display: none;">
+                    </div>
+                    <div class="form-group" style="grid-column: span 2;">
+                        <button type="submit" class="btn">Upload Material</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recent Uploads -->
+    <section class="recent-uploads">
+        <div class="container">
+            <div class="section-title">
+                <h2>Recently Uploaded Materials</h2>
+                <p>Check out the latest study materials shared by students</p>
+            </div>
+            <div class="materials-grid">
+                <div class="material-card">
+                    <div class="material-header">
+                        <h3>Thermodynamics Lecture Notes</h3>
+                        <div class="material-meta">
+                            <span>Mechanical Engineering</span>
+                            <span>Year 2</span>
+                        </div>
+                    </div>
+                    <div class="material-body">
+                        <p class="material-description">Complete lecture notes covering all thermodynamics concepts with diagrams and examples.</p>
+                        <div class="material-tags">
+                            <span class="tag">thermodynamics</span>
+                            <span class="tag">lecture notes</span>
+                            <span class="tag">mechanical</span>
+                        </div>
+                        <div class="material-actions">
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <span>(12)</span>
+                            </div>
+                            <a href="#" class="btn">Download</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="material-card">
+                    <div class="material-header">
+                        <h3>Circuit Analysis Solved Problems</h3>
+                        <div class="material-meta">
+                            <span>Electrical Engineering</span>
+                            <span>Year 3</span>
+                        </div>
+                    </div>
+                    <div class="material-body">
+                        <p class="material-description">Collection of 50+ solved circuit analysis problems with detailed solutions.</p>
+                        <div class="material-tags">
+                            <span class="tag">circuits</span>
+                            <span class="tag">solved problems</span>
+                            <span class="tag">electrical</span>
+                        </div>
+                        <div class="material-actions">
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <span>(24)</span>
+                            </div>
+                            <a href="#" class="btn">Download</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="material-card">
+                    <div class="material-header">
+                        <h3>Data Structures Cheat Sheet</h3>
+                        <div class="material-meta">
+                            <span>Computer Engineering</span>
+                            <span>Year 2</span>
+                        </div>
+                    </div>
+                    <div class="material-body">
+                        <p class="material-description">Comprehensive cheat sheet covering all major data structures and algorithms.</p>
+                        <div class="material-tags">
+                            <span class="tag">data structures</span>
+                            <span class="tag">cheat sheet</span>
+                            <span class="tag">computer</span>
+                        </div>
+                        <div class="material-actions">
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span>(37)</span>
+                            </div>
+                            <a href="#" class="btn">Download</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>EngHub</h3>
+                    <p>A platform for engineering students to share and access study materials worldwide.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#browse">Browse</a></li>
+                        <li><a href="#upload">Upload</a></li>
+                        <li><a href="#">Login</a></li>
+                        <li><a href="#">Sign Up</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Categories</h3>
+                    <ul>
+                        <li><a href="#">Mechanical</a></li>
+                        <li><a href="#">Electrical</a></li>
+                        <li><a href="#">Computer</a></li>
+                        <li><a href="#">Civil</a></li>
+                        <li><a href="#">Chemical</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Feedback</a></li>
+                        <li><a href="#">Report Issue</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 EngHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple JavaScript for file upload interaction
+        document.querySelector('.file-upload').addEventListener('click', function() {
+            document.querySelector('.file-upload input').click();
+        });
+        
+        document.querySelector('.file-upload input').addEventListener('change', function(e) {
+            if(e.target.files.length > 0) {
+                document.querySelector('.file-upload h3').textContent = e.target.files[0].name;
+                document.querySelector('.file-upload p').textContent = 'Click to change file';
+            }
+        });
+    </script>
+</body>
+</html>
