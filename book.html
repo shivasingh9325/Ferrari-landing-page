@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Haven - Your Ultimate Book Store</title>
+    <style>
+        /* CSS Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Global Styles */
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: #0066c0;
+        }
+
+        a:hover {
+            text-decoration: underline;
+            color: #c45500;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #232f3e;
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #ff9900;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            font-weight: 500;
+        }
+
+        .search-bar {
+            margin: 20px 0;
+            display: flex;
+        }
+
+        .search-bar input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            font-size: 16px;
+        }
+
+        .search-bar button {
+            background-color: #ff9900;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* Hero Section */
+        .hero {
+            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .hero-content h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .hero-content p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #ff9900;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #e88a00;
+            text-decoration: none;
+        }
+
+        /* Categories Section */
+        .categories {
+            margin: 40px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 32px;
+            color: #232f3e;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .category-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .category-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .category-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .category-info h3 {
+            margin-bottom: 10px;
+            color: #232f3e;
+        }
+
+        /* Featured Books */
+        .featured-books {
+            margin: 60px 0;
+        }
+
+        .book-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 25px;
+        }
+
+        .book-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .book-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .book-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-bottom: 1px solid #eee;
+        }
+
+        .book-info {
+            padding: 15px;
+        }
+
+        .book-info h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+            color: #232f3e;
+        }
+
+        .book-info .author {
+            color: #555;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .book-info .price {
+            font-weight: bold;
+            color: #b12704;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .amazon-btn {
+            display: block;
+            background-color: #ff9900;
+            color: white;
+            text-align: center;
+            padding: 8px 0;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        /* Newsletter */
+        .newsletter {
+            background-color: #232f3e;
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .newsletter h2 {
+            margin-bottom: 20px;
+        }
+
+        .newsletter p {
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            font-size: 16px;
+        }
+
+        .newsletter-form button {
+            background-color: #ff9900;
+            color: white;
+            border: none;
+            padding: 0 20px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #131a22;
+            color: #ddd;
+            padding: 40px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: #ddd;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            font-size: 14px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul {
+                margin-top: 20px;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 0 10px;
+            }
+
+            .hero-content h1 {
+                font-size: 36px;
+            }
+
+            .hero-content p {
+                font-size: 18px;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .newsletter-form input {
+                border-radius: 4px;
+                margin-bottom: 10px;
+            }
+
+            .newsletter-form button {
+                border-radius: 4px;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">Book<span>Haven</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Categories</a></li>
+                    <li><a href="#">Bestsellers</a></li>
+                    <li><a href="#">New Releases</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="container">
+            <div class="search-bar">
+                <input type="text" placeholder="Search for books, authors, or categories...">
+                <button>Search</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Discover Your Next Favorite Book</h1>
+            <p>Millions of books at your fingertips with direct Amazon links</p>
+            <a href="#featured" class="btn">Browse Books</a>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories container">
+        <h2 class="section-title">Book Categories</h2>
+        <div class="category-grid">
+            <div class="category-card">
+                <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Fiction">
+                <div class="category-info">
+                    <h3>Fiction</h3>
+                    <a href="#">Explore</a>
+                </div>
+            </div>
+            <div class="category-card">
+                <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Science">
+                <div class="category-info">
+                    <h3>Science</h3>
+                    <a href="#">Explore</a>
+                </div>
+            </div>
+            <div class="category-card">
+                <img src="https://images.unsplash.com/photo-1535905557558-afc4877a26fc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Biography">
+                <div class="category-info">
+                    <h3>Biography</h3>
+                    <a href="#">Explore</a>
+                </div>
+            </div>
+            <div class="category-card">
+                <img src="https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Business">
+                <div class="category-info">
+                    <h3>Business</h3>
+                    <a href="#">Explore</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Books -->
+    <section class="featured-books container" id="featured">
+        <h2 class="section-title">Featured Books</h2>
+        <div class="book-grid">
+            <!-- Book 1 -->
+            <div class="book-card">
+                <img src="https://m.media-amazon.com/images/I/91Q5dCjc2KL._AC_UF1000,1000_QL80_.jpg" alt="Atomic Habits">
+                <div class="book-info">
+                    <h3>Atomic Habits</h3>
+                    <p class="author">James Clear</p>
+                    <p class="price">$11.98</p>
+                    <a href="https://www.amazon.com/Atomic-Habits-James-Clear/dp/0735211299" class="amazon-btn" target="_blank">View on Amazon</a>
+                </div>
+            </div>
+            
+            <!-- Book 2 -->
+            <div class="book-card">
+                <img src="https://m.media-amazon.com/images/I/71Ks+S8TfrL._AC_UF1000,1000_QL80_.jpg" alt="The Midnight Library">
+                <div class="book-info">
+                    <h3>The Midnight Library</h3>
+                    <p class="author">Matt Haig</p>
+                    <p class="price">$13.99</p>
+                    <a href="https://www.amazon.com/Midnight-Library-Matt-Haig/dp/0525559477" class="amazon-btn" target="_blank">View on Amazon</a>
+                </div>
+            </div>
+            
+            <!-- Book 3 -->
+            <div class="book-card">
+                <img src="https://m.media-amazon.com/images/I/91bYsX41DVL._AC_UF1000,1000_QL80_.jpg" alt="Educated">
+                <div class="book-info">
+                    <h3>Educated</h3>
+                    <p class="author">Tara Westover</p>
+                    <p class="price">$12.99</p>
+                    <a href="https://www.amazon.com/Educated-Memoir-Tara-Westover/dp/0399590501" class="amazon-btn" target="_blank">View on Amazon</a>
+                </div>
+            </div>
+            
+            <!-- Book 4 -->
+            <div class="book-card">
+                <img src="https://m.media-amazon.com/images/I/81WZ6QvGZ2L._AC_UF1000,1000_QL80_.jpg" alt="Sapiens">
+                <div class="book-info">
+                    <h3>Sapiens</h3>
+                    <p class="author">Yuval Noah Harari</p>
+                    <p class="price">$13.99</p>
+                    <a href="https://www.amazon.com/Sapiens-Humankind-Yuval-Noah-Harari/dp/0062316117" class="amazon-btn" target="_blank">View on Amazon</a>
+                </div>
+            </div>
+            
+            <!-- Book 5 -->
+            <div class="book-card">
+                <img src="https://m.media-amazon.com/images/I/71X1p4TGlxL._AC_UF1000,1000_QL80_.jpg" alt="The Silent Patient">
+                <div class="book-info">
+                    <h3>The Silent Patient</h3>
+                    <p class="author">Alex Michaelides</p>
+                    <p class="price">$9.48</p>
+                    <a href="https://www.amazon.com/Silent-Patient-Alex-Michaelides/dp/1250301696" class="amazon-btn" target="_blank">View on Amazon</a>
+                </div>
+            </div>
+            
+            <!-- Book 6 -->
+            <div class="book-card">
+                <img src="https://m.media-amazon.com/images/I/71Xqq8IOCnL._AC_UF1000,1000_QL80_.jpg" alt="Where the Crawdads Sing">
+                <div class="book-info">
+                    <h3>Where the Crawdads Sing</h3>
+                    <p class="author">Delia Owens</p>
+                    <p class="price">$9.98</p>
+                    <a href="https://www.amazon.com/Where-Crawdads-Sing-Delia-Owens/dp/0735219095" class="amazon-btn" target="_blank">View on Amazon</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <div class="container">
+            <h2>Stay Updated</h2>
+            <p>Subscribe to our newsletter to receive updates on new releases, special offers, and book recommendations.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Your email address">
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Shop</h3>
+                    <ul>
+                        <li><a href="#">All Books</a></li>
+                        <li><a href="#">New Releases</a></li>
+                        <li><a href="#">Bestsellers</a></li>
+                        <li><a href="#">Deals</a></li>
+                        <li><a href="#">Textbooks</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>About</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Affiliates</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Help</h3>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Returns</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Connect</h3>
+                    <ul>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">Pinterest</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 BookHaven. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+                <p>Note: This is an affiliate website. When you click on links to Amazon and make a purchase, we may earn a commission.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
